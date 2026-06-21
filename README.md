@@ -23,6 +23,28 @@ python src/bench_runner.py --config bench_config.yaml
 
 結果は `results/` に JSON と CSV で出力されます。
 
+## 番号付きバージョン
+
+- `src/00_bench_runner.py` / `00_bench_config.yaml`: 最初の版です。`file.root_dir` が空の場合はOS既定の一時ディレクトリを使います。
+- `src/01_bench_runner_disk.py` / `01_bench_config_disk.yaml`: ファイル系ベンチで実ディスク上のディレクトリ指定を必須にした版です。Linuxで `tmpfs` / `ramfs` / `devtmpfs` などのメモリ上ファイルシステムを検出した場合は実行を拒否します。
+- `src/02_bench_runner_disk_affinity.py` / `02_bench_config_disk_affinity.yaml`: `01_` 版にCPU affinity指定を追加した版です。workerごとに指定した論理CPU/vCPUへ固定します。
+
+実ディスク比較では `01_` 版を使ってください。
+
+```bash
+python src/01_bench_runner_disk.py --config 01_bench_config_disk.yaml
+```
+
+Linux VM では、`01_bench_config_disk.yaml` の `file.root_dir` を `/var/tmp/gcl_disk_bench` やホームディレクトリ配下など、仮想ディスク上のパスに変更してください。`/tmp` が `tmpfs` の環境では使わないでください。
+
+CPUを固定して比較する場合は `02_` 版を使います。
+
+```bash
+python src/02_bench_runner_disk_affinity.py --config 02_bench_config_disk_affinity.yaml
+```
+
+`cpu_affinity` には使用する論理CPU IDを指定します。Linux VMではゲストから見える vCPU ID、Windows NativeではWindowsから見える論理CPU IDです。これはCPU affinityの指定であり、OSからCPUを完全に占有するものではありません。
+
 ## 調整の目安
 
 Windows ネイティブの Core i9-14900K で 10-30 秒程度に寄せる初期値にしていますが、環境差が大きい場合は以下を調整してください。

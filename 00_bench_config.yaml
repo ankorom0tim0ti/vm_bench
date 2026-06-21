@@ -1,0 +1,18 @@
+benchmark: all
+dram_limit_mb: 4096
+output_dir: results
+
+cpu:
+  worker_count: 8
+  rounds: 3
+  iterations_per_worker: 40000000
+
+file:
+  root_dir: ""
+  worker_count: 8
+  rounds: 3
+  files_per_worker: 2000
+  file_size_bytes: 4096
+  read_repeats: 2
+  fsync_each_file: true
+  cleanup: true

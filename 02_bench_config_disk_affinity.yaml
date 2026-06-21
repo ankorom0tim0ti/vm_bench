@@ -1,0 +1,28 @@
+benchmark: all
+dram_limit_mb: 4096
+output_dir: results
+
+# Logical CPU IDs to use. Each worker is pinned to one ID in order:
+# worker 0 -> CPU 0, worker 1 -> CPU 1, ...
+# Windows native i9-14900K example: choose known P-core logical IDs after checking Task Manager or Process Explorer.
+# Linux VM example: [0, 1, 2, 3, 4, 5, 6, 7] maps to guest vCPU IDs.
+cpu_affinity: [0, 1, 2, 3, 4, 5, 6, 7]
+
+cpu:
+  worker_count: 8
+  rounds: 3
+  iterations_per_worker: 40000000
+
+file:
+  # Set this to a directory on the real test disk in each environment.
+  # Linux VM example: /var/tmp/gcl_disk_bench
+  # Windows example: C:/gcl_disk_bench
+  root_dir: C:/gcl_disk_bench
+  reject_memory_filesystems: true
+  worker_count: 8
+  rounds: 3
+  files_per_worker: 2000
+  file_size_bytes: 4096
+  read_repeats: 2
+  fsync_each_file: true
+  cleanup: true
