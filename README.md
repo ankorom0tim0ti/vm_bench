@@ -28,6 +28,7 @@ python src/bench_runner.py --config bench_config.yaml
 - `src/00_bench_runner.py` / `00_bench_config.yaml`: 最初の版です。`file.root_dir` が空の場合はOS既定の一時ディレクトリを使います。
 - `src/01_bench_runner_disk.py` / `01_bench_config_disk.yaml`: ファイル系ベンチで実ディスク上のディレクトリ指定を必須にした版です。Linuxで `tmpfs` / `ramfs` / `devtmpfs` などのメモリ上ファイルシステムを検出した場合は実行を拒否します。
 - `src/02_bench_runner_disk_affinity.py` / `02_bench_config_disk_affinity.yaml`: `01_` 版にCPU affinity指定を追加した版です。workerごとに指定した論理CPU/vCPUへ固定します。
+- `src/03_bench_runner_project_temp_affinity.py` / `03_bench_config_project_temp_affinity.yaml`: `02_` 版のCPU affinity機能を残しつつ、ファイル系ベンチの作業場所をプロジェクト内の `temp_dir/` にした版です。`temp_dir/` は `.gitignore` 対象です。
 
 実ディスク比較では `01_` 版を使ってください。
 
@@ -44,6 +45,12 @@ python src/02_bench_runner_disk_affinity.py --config 02_bench_config_disk_affini
 ```
 
 `cpu_affinity` には使用する論理CPU IDを指定します。Linux VMではゲストから見える vCPU ID、Windows NativeではWindowsから見える論理CPU IDです。これはCPU affinityの指定であり、OSからCPUを完全に占有するものではありません。
+
+プロジェクト内の `temp_dir/` を使ってファイル系を比較する場合は `03_` 版を使います。
+
+```bash
+python src/03_bench_runner_project_temp_affinity.py --config 03_bench_config_project_temp_affinity.yaml
+```
 
 ## 調整の目安
 

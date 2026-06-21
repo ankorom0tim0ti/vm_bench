@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 results/
 bench_tmp/
+temp_dir/

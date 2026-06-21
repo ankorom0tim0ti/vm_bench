@@ -15,11 +15,9 @@ cpu:
   iterations_per_worker: 40000000
 
 file:
-  # Set this to a directory on the real test disk in each environment.
-  # Linux VM example: /var/tmp/gcl_disk_bench
-  # Windows example: C:/gcl_disk_bench
-  # root_dir: C:/gcl_disk_bench # Windows
-  root_dir: /var/tmp/gcl_disk_bench # Linux
+  # Relative paths are resolved from this YAML file's directory.
+  # The benchmark creates round directories under this project-local temp_dir.
+  root_dir: temp_dir
   reject_memory_filesystems: true
   worker_count: 8
   rounds: 3
