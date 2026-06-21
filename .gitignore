@@ -1,0 +1,6 @@
+__pycache__/
+.agents/
+.venv/
+*.pyc
+results/
+bench_tmp/
