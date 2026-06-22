@@ -6,8 +6,8 @@ output_dir: results
 # worker 0 -> CPU 0, worker 1 -> CPU 1, ...
 # Windows native i9-14900K example: choose known P-core logical IDs after checking Task Manager or Process Explorer.
 # Linux VM example: [0, 1, 2, 3, 4, 5, 6, 7] maps to guest vCPU IDs.
-cpu_affinity: [0, 1, 2, 3, 4, 5, 6, 7] # Linux
-# cpu_affinity: [0, 2, 4, 6, 8, 10, 12, 14] # Windows
+# cpu_affinity: [0, 1, 2, 3, 4, 5, 6, 7] # Linux
+cpu_affinity: [0, 2, 4, 6, 8, 10, 12, 14] # Windows
 
 cpu:
   worker_count: 8
